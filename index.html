@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <!-- TikTok Pixel -->
+    <!-- TikTok Pixel Code Start -->
     <script>
-    !function(w,d,t,r,u){var f,n,i;w[t]=w[t]||[],f=d.getElementsByTagName(r)[0],n=d.createElement(r),n.async=!0,n.src="https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=D9GN5U3C77UD5IE545CG",f.parentNode.insertBefore(n,f);
-    w[t].push({'event':'Initialize','pixelId':'D9GN5U3C77UD5IE545CG'});
-    }(window,document,'ttq','script');
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;
+      var ttq=w[t]=w[t]||[];
+      ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};
+      for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e};
+      ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+      ttq.load('D9GN5U3C77UD5IE545CG');
+      ttq.page();
+    }(window, document, 'ttq');
     </script>
+    <!-- TikTok Pixel Code End -->
     <style>
         *{margin:0;padding:0;box-sizing:border-box;}
         body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -17,7 +26,7 @@
         .icon{font-size:60px;margin-bottom:20px;}
         h1{color:#1a1a2e;font-size:24px;margin-bottom:12px;}
         p{color:#666;font-size:16px;line-height:1.6;margin-bottom:30px;}
-        .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:#25D366;color:#fff;text-decoration:none;border-radius:50px;font-size:18px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 15px rgba(37,211,102,0.4);cursor:pointer;}
+        .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:#25D366;color:#fff;text-decoration:none;border-radius:50px;font-size:18px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 15px rgba(37,211,102,0.4);cursor:pointer;border:none;}
         .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(37,211,102,0.5);}
         .btn:active{transform:scale(0.97);}
         .footer{margin-top:24px;font-size:12px;color:#999;}
