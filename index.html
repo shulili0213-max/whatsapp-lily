@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>联系我们</title>
+<title>Contact Us</title>
 <script>
   var DEFAULT_PIXEL = "D9IBHJ3C77U820ARKGCG";
   var PIXEL_ID = new URLSearchParams(location.search).get('pixel') || DEFAULT_PIXEL;
@@ -15,7 +15,7 @@
     for (var i=0;i<ttq.methods.length;i++) ttq.setAndDefer(ttq, ttq.methods[i]);
     ttq.instance = function(t){ for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++) ttq.setAndDefer(e,ttq.methods[n]); return e };
     ttq.load = function(e,n){
-      if(!e){ console.error('❌ 缺少像素ID'); return; }
+      if(!e){ return; }
       var i="https://analytics.tiktok.com/i18n/pixel/events.js";
       ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};
       var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;
@@ -26,27 +26,15 @@
   }(window, document, "ttq");
 </script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
-  .card{background:#fff;border-radius:20px;padding:40px 30px;text-align:center;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
-  .icon{font-size:60px;margin-bottom:20px;}
-  h1{color:#1a1a2e;font-size:24px;margin-bottom:12px;}
-  p{color:#666;font-size:16px;line-height:1.6;margin-bottom:30px;}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:#25D366;color:#fff;border-radius:50px;font-size:18px;font-weight:600;transition:all 0.3s;box-shadow:0 4px 15px rgba(37,211,102,0.4);cursor:pointer;border:none;}
-  .btn:active{transform:scale(0.97);}
-  .footer{margin-top:24px;font-size:12px;color:#999;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;margin:0;color:#fff;text-align:center;}
+  .msg{max-width:360px;font-size:16px;line-height:1.6;}
+  .spin{display:inline-block;width:24px;height:24px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
-  <div class="card">
-    <div class="icon">💬</div>
-    <h1>联系我们</h1>
-    <p>点击下方按钮，在WhatsApp上与我们展开对话。我们通常几分钟内回复。</p>
-    <button class="btn" id="waBtn">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp聊天
-    </button>
-    <div class="footer">快速响应 • 营业时间</div>
+  <div class="msg">
+    <span class="spin"></span>Redirecting to WhatsApp...
   </div>
 <script>
   var WA_PHONE = "8619083562661";
@@ -54,13 +42,15 @@
   var keepKeys = ["tkclid","click_id","campaign","ad_id","creative","utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
   var extras = [];
   keepKeys.forEach(function(k){ if(params.has(k)) extras.push(k + "=" + params.get(k)); });
-  var baseMsg = "你好，我想咨询一下产品";
+  var baseMsg = "Hi, I would like to inquire about your product.";
   var trackStr = extras.length ? " | " + extras.join("&") : "";
   var waUrl = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(baseMsg + trackStr);
-  document.getElementById('waBtn').addEventListener('click', function () {
-    try { ttq.track('Contact'); } catch(e){}
-    setTimeout(function(){ window.location.href = waUrl; }, 500);
-  });
+
+  // 立刻上报 Contact 事件（落地+联系一起报）
+  try { ttq.track('Contact'); } catch(e){}
+
+  // 500ms 后自动跳转 WhatsApp
+  setTimeout(function(){ window.location.href = waUrl; }, 500);
 </script>
 </body>
 </html>
