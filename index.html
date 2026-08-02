@@ -30,11 +30,14 @@
   .msg{max-width:360px;font-size:16px;line-height:1.6;}
   .spin{display:inline-block;width:24px;height:24px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px;}
   @keyframes spin{to{transform:rotate(360deg);}}
+  .status{margin-top:16px;font-size:13px;opacity:.8;}
+  .ok{color:#4ade80;}
 </style>
 </head>
 <body>
   <div class="msg">
-    <span class="spin"></span>Redirecting to WhatsApp...
+    <div><span class="spin"></span> Redirecting to WhatsApp...</div>
+    <div class="status" id="status">Loading...</div>
   </div>
 <script>
   var WA_PHONE = "8619083562661";
@@ -46,11 +49,42 @@
   var trackStr = extras.length ? " | " + extras.join("&") : "";
   var waUrl = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(baseMsg + trackStr);
 
-  // 立刻上报 Contact 事件（落地+联系一起报）
-  try { ttq.track('Contact'); } catch(e){}
+  var statusEl = document.getElementById('status');
 
-  // 500ms 后自动跳转 WhatsApp
-  setTimeout(function(){ window.location.href = waUrl; }, 500);
+  function doRedirect() {
+    try {
+      ttq.track('Contact');
+      statusEl.className = 'status ok';
+      statusEl.textContent = 'Event sent! Redirecting...';
+    } catch(e) {
+      statusEl.textContent = 'Tracking error: ' + e.message;
+    }
+    try {
+      var beaconData = new URLSearchParams();
+      beaconData.set('event', 'Contact');
+      beaconData.set('pixel_id', typeof PIXEL_ID !== 'undefined' ? PIXEL_ID : '');
+      beaconData.set('url', location.href);
+      navigator.sendBeacon('https://analytics.tiktok.com/i18n/pixel/track', beaconData);
+    } catch(e){}
+    setTimeout(function(){
+      window.location.href = waUrl;
+    }, 1500);
+  }
+
+  function waitForPixel() {
+    if (typeof ttq !== 'undefined' && ttq.loaded) {
+      statusEl.textContent = 'Pixel ready, sending events...';
+      setTimeout(doRedirect, 500);
+    } else if (typeof ttq !== 'undefined') {
+      statusEl.textContent = 'Waiting for pixel...';
+      setTimeout(waitForPixel, 500);
+    } else {
+      statusEl.textContent = 'Pixel not found, redirecting anyway...';
+      setTimeout(doRedirect, 2000);
+    }
+  }
+
+  setTimeout(waitForPixel, 1000);
 </script>
 </body>
 </html>
