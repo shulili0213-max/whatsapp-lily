@@ -160,21 +160,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     <div class="s"><span class="n">3</span>Get cash in minutes</div>
   </div>
   <div class="btns">
-    <a class="btn" id="b1" href="https://wa.me/85293811744?text=Hello%2C%20please%20send%20me%20today%27s%20latest%20gift%20card%20real-time%20exchange%20rate." target="_blank" rel="noopener">
+    <a class="btn" id="b1" href="https://wa.me/85293811744?text=Hello%2C%20please%20send%20me%20today%27s%20latest%20gift%20card%20real-time%20exchange%20rate.">
       <span class="chip">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-3 3 3 4-5"/></svg>
       </span>
       <span class="tx"><b>Check Live Rate (Got a Card?)</b><span>Send your card brand &amp; balance</span></span>
       <span class="go">›</span>
     </a>
-    <a class="btn" id="b2" href="https://wa.me/85293811744?text=Hello%2C%20I%20have%20valid%20gift%20cards%20for%20sale%2C%20please%20guide%20the%20exchange%20process." target="_blank" rel="noopener">
+    <a class="btn" id="b2" href="https://wa.me/85293811744?text=Hello%2C%20I%20have%20valid%20gift%20cards%20for%20sale%2C%20please%20guide%20the%20exchange%20process.">
       <span class="chip">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
       </span>
       <span class="tx"><b>Sell My Gift Card</b><span>Guided, secure process</span></span>
       <span class="go">›</span>
     </a>
-    <a class="btn pri" id="b3" href="https://wa.me/85293811744?text=Hello%2C%20I%20want%20to%20redeem%20my%20gift%20card.%20Please%20guide%20me%20on%20the%20process%20and%20current%20rate." target="_blank" rel="noopener">
+    <a class="btn pri" id="b3" href="https://wa.me/85293811744?text=Hello%2C%20I%20want%20to%20redeem%20my%20gift%20card.%20Please%20guide%20me%20on%20the%20process%20and%20current%20rate.">
       <span class="chip">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
       </span>
@@ -182,7 +182,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="tag">EASY</span>
       <span class="go">›</span>
     </a>
-    <a class="btn" id="b4" href="https://wa.me/85293811744?text=Hello%2C%20I%20need%20stable%20long-term%20bulk%20gift%20card%20cooperation.%20Please%20send%20your%20bulk%20rate%20and%20rules." target="_blank" rel="noopener">
+    <a class="btn" id="b4" href="https://wa.me/85293811744?text=Hello%2C%20I%20need%20stable%20long-term%20bulk%20gift%20card%20cooperation.%20Please%20send%20your%20bulk%20rate%20and%20rules.">
       <span class="chip">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/></svg>
       </span>
@@ -236,7 +236,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     if(document.visibilityState === 'hidden'){ fireOnce(); return; }
     var chk = function(){ if(document.visibilityState === 'hidden'){ fireOnce(); cleanup(); } };
     document.addEventListener('visibilitychange', chk);
-    function cleanup(){ document.removeEventListener('visibilitychange', chk); }
+    // pagehide 兜底：用户在当前页跳去 wa.me / WhatsApp 时也会触发
+    function onHide(){ fireOnce(); cleanup(); }
+    window.addEventListener('pagehide', onHide);
+    function cleanup(){
+      document.removeEventListener('visibilitychange', chk);
+      window.removeEventListener('pagehide', onHide);
+    }
     // 2.6s 后仍在前台 = 没跳走（没装 WA / 关掉），不回传，并清理监听
     setTimeout(function(){ if(!fired) cleanup(); }, 2600);
   }
