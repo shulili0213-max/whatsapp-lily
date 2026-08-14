@@ -24,7 +24,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <script>
 (function(){
   /* ===== 配置 ===== */
-  var WA_NUMBER   = '85293811744';     // Lily / Ava
+  var WA_NUMBER   = '85293811744';   // Lily / Ava
   var EVENT_NAME  = 'Contact';         // TK 优化事件名（跳进 WA 才发）
   var MIN_MS      = 700;               // 少于这个毫秒数的"跳走"视为抖动，不算
   var FALLBACK_MS = 800;               // 没唤起 App 就落网页版（从 1200 缩到 800，更快）
@@ -93,7 +93,15 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   });
 
   /* ===== 跳转 ===== */
-  location.href = deep;
+  // 先等像素库就绪并把 PageView 送出去，再跳 WhatsApp，避免页面瞬间跳转把事件漏掉
+  var redirected = false;
+  function goWA(){ if(redirected) return; redirected = true; location.href = deep; }
+  if (typeof ttq !== 'undefined' && typeof ttq.ready === 'function') {
+    ttq.ready(goWA);          // 像素就绪后立即跳（通常 <200ms）
+    setTimeout(goWA, 500);    // 兜底：万一 ready 不触发，500ms 后也跳，避免卡死
+  } else {
+    setTimeout(goWA, 300);    // 无 ready 接口时给 300ms 让像素初始化
+  }
   setTimeout(function(){
     if(document.visibilityState === 'visible'){         // 还停在本页 = 没装 App
       goingFallback = true;
