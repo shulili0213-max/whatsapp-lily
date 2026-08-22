@@ -24,7 +24,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 <script>
 (function(){
   /* ===== 配置 ===== */
-  var WA_NUMBER   = '85293811744';   // Lily / Ava（原 Erin 号已替换为 Lily 现用号）
+  var WA_NUMBER   = '8619083562661';  // Lily 本人号（+86 190 8356 2661）
   var EVENT_NAME  = 'Contact';         // TK 优化事件名（跳进 WA 才发）
   var MIN_MS      = 700;               // 少于这个毫秒数的"跳走"视为抖动，不算
   var FALLBACK_MS = 800;               // 没唤起 App 就落网页版（从 1200 缩到 800，更快）
@@ -62,8 +62,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
   }
 
   /* ===== 回传：页面被 WhatsApp 顶到后台、且停留满 MIN_MS 才算一次 Contact =====
-     这样：真进 WA 的人一直停在后台 → 发；手抖瞬间切回 → 计时被取消 → 不发。
-     解决了"快设备 700ms 内唤起导致回传漏掉"的问题。 */
+     这样：真进 WA 的人一直停在后台 → 发；手抖瞬间切回 → 计时被取消 → 不发。 */
   function fire(){
     if(fired) return;
     try{ if(sessionStorage.getItem('wa_fired')==='1'){ fired = true; return; } }catch(e){}
